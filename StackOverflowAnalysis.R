@@ -16,6 +16,18 @@ View(survey_results_public)
 
 # First thing to do is to explore the data, what is in it, if it is clean/complete, etc
 
+# Get an idea of the datashet
+head(survey_results_public)
+
+# Country column
+print(survey_results_public$Country)
+
+# How many times a country appear
+table(survey_results_public$Country)
+
+# We try to do the same with salary, but it is useless because there are too many different values
+table(survey_results_public$Country)
+# So we should set some ranges
 
 
 # Then we can look into ideas what "question go answer" by looking in Kaggle some Kernels
@@ -25,3 +37,5 @@ View(survey_results_public)
 
 # I was curious to practice a bar chart to see # of contributions per country
 library(ggplot2)
+
+
