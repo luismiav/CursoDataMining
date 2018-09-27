@@ -1,0 +1,54 @@
+---
+title: "StackOverflowData"
+output: bookdown::gitbook
+date: "25-09-2018"
+---
+
+# Introduction
+
+We are anlalyzing StackOverflow data. This is a data frame with 51392 observations and 154 variables
+
+
+```{r Data, echo=FALSE, warning=FALSE, message=FALSE}
+library(readr)
+survey_results_public <- read_csv("survey_results_public.csv")
+head(survey_results_public)
+```
+
+We want to predict the salary of a person based on variables like programming language, age, Formal Education, years of programming, years in a programming job, job satisfaction, job security or any kind of variable that could have a relation with it.
+
+We are going to segment data per country since we see big differences between salaries just at looking to the data.
+
+<!--Meter max mean salary y minimo -->
+
+As we want to work on salaries we want to see the mean salary per country.
+
+```{r ejemplo, echo=FALSE, warning=FALSE, message=FALSE}
+library(dplyr)
+mean_salary1=group_by(survey_results_public,Country)
+
+mean_salary=summarise(mean_salary1,mean=mean(Salary,na.rm=TRUE),number=n())
+
+
+top_mean_salary = top_n (mean_salary, 10)
+
+library(ggplot2)
+
+top_mean_salary %>%
+  ggplot() +
+  geom_bar(mapping= aes(x=Country, y=number), stat="identity", fill="tan1", colour="sienna3")+
+  geom_point(mapping = aes(x=Country, y=mean))+
+  geom_line(mapping= aes(x=Country, y =number)) +
+  scale_y_continuous(sec.axis = sec_axis(~./max(top_mean_salary$number)))
+
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+
+```{r pressure, echo=FALSE}
+library(ggplot2)
+ggplot(cars,aes(x=speed,y=dist)) + geom_point()
+```
