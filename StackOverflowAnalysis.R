@@ -16,16 +16,23 @@ View(survey_results_public)
 
 # First thing to do is to explore the data, what is in it, if it is clean/complete, etc
 
-library(dplyr)
-library(tidyr)
+# Get an idea of the datashet
+head(survey_results_public)
+
+# Country column
+print(survey_results_public$Country)
+
+# How many times a country appear
+table(survey_results_public$Country)
+
+# We try to do the same with salary, but it is useless because there are too many different values
+table(survey_results_public$Country)
+# So we should set some ranges
+
 
 # Then we can look into ideas what "question go answer" by looking in Kaggle some Kernels
 # https://www.kaggle.com/stackoverflow/so-survey-2017/kernels
 
-
-
-# I was curious to practice a bar chart to see # of contributions per country
-library(ggplot2)
 
 # Get mean salary per country and number of respondents
 
@@ -34,3 +41,4 @@ mean_salary= survey_results_public %>% group_by(Country) %>% summarise(mean=mean
 # Get top 10 respondent countries
 
 top_mean_salary = top_n (mean_salary, 10)
+
