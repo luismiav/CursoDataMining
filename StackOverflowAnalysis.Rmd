@@ -178,5 +178,9 @@ males %>%
   ggplot() +
   geom_bar(mapping= aes(x=factor(male, levels= unique(male)), y=mean), stat="identity", fill="tan1", colour="sienna3")
 
+row.has.na <- apply(train1, 1, function(x){any(is.na(x))})
+train1_withoutNA = train1[!row.has.na,]
+
+cor(train1_withoutNA$Salary,train1_withoutNA$male)
 
 ```
