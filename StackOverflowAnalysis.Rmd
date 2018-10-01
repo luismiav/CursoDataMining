@@ -187,6 +187,7 @@ cor(train1_withoutNA$Salary,train1_withoutNA$male)
 
 ```{r correlation_NumYears, echo=FALSE, warning= FALSE, message= FALSE}
 
+salary_vs_yearscodedjob=select(train, "Salary", "YearsCodedJob")
 train2=salary_vs_yearscodedjob
 train2$NumYears = salary_vs_yearscodedjob$YearsCodedJob
 row.has.na <- apply(train2, 1, function(x){any(is.na(x))})
