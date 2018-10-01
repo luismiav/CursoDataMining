@@ -196,4 +196,7 @@ train2_withoutNA$NumYears[is.na(train2_withoutNA$NumYears)] <- 0
 
 cor(train2_withoutNA$Salary,train2_withoutNA$NumYears)
 
+m1 <- lm(formula = train2_withoutNA$NumYears ~ train2_withoutNA$Salary, data = train2_withoutNA)
+ggplot(aes(x=train2_withoutNA$NumYears, y=train2_withoutNA$Salary), data = train2_withoutNA) + geom_point() + geom_smooth(method = "lm")
+
 ```
