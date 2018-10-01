@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>StackOverflowData</title>
+  <meta name="description" content="StackOverflowData">
+  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+
+  <meta property="og:title" content="StackOverflowData" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="StackOverflowData" />
+  
+  
+  
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+
+
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path=""><a href="#introduction"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
+<li class="chapter" data-level="1.1" data-path=""><a href="#there-is-no-correlation-between-jobsatisfaction-and-salary"><i class="fa fa-check"></i><b>1.1</b> There is no correlation between JobSatisfaction and Salary</a></li>
+<li class="chapter" data-level="1.2" data-path=""><a href="#there-is-no-correlation-between-gender-and-salary"><i class="fa fa-check"></i><b>1.2</b> There is no correlation between Gender and Salary</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">StackOverflowData</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="header">
+<h1 class="title">StackOverflowData</h1>
+<h4 class="date"><em>25-09-2018</em></h4>
+</div>
+<div id="introduction" class="section level1">
+<h1><span class="header-section-number">1</span> Introduction</h1>
+<p>We are anlalyzing StackOverflow data. This is a data frame with 51392 observations and 154 variables</p>
+<pre><code>## # A tibble: 6 x 154
+##   Respondent Professional ProgramHobby Country University EmploymentStatus
+##        &lt;int&gt; &lt;chr&gt;        &lt;chr&gt;        &lt;chr&gt;   &lt;chr&gt;      &lt;chr&gt;           
+## 1          1 Student      Yes, both    United~ No         Not employed, a~
+## 2          2 Student      Yes, both    United~ Yes, full~ Employed part-t~
+## 3          3 Professiona~ Yes, both    United~ No         Employed full-t~
+## 4          4 Professiona~ Yes, both    United~ No         Employed full-t~
+## 5          5 Professiona~ Yes, I prog~ Switze~ No         Employed full-t~
+## 6          6 Student      Yes, both    New Ze~ Yes, full~ Not employed, a~
+## # ... with 148 more variables: FormalEducation &lt;chr&gt;,
+## #   MajorUndergrad &lt;chr&gt;, HomeRemote &lt;chr&gt;, CompanySize &lt;chr&gt;,
+## #   CompanyType &lt;chr&gt;, YearsProgram &lt;chr&gt;, YearsCodedJob &lt;chr&gt;,
+## #   YearsCodedJobPast &lt;chr&gt;, DeveloperType &lt;chr&gt;, WebDeveloperType &lt;chr&gt;,
+## #   MobileDeveloperType &lt;chr&gt;, NonDeveloperType &lt;chr&gt;,
+## #   CareerSatisfaction &lt;int&gt;, JobSatisfaction &lt;int&gt;, ExCoderReturn &lt;chr&gt;,
+## #   ExCoderNotForMe &lt;chr&gt;, ExCoderBalance &lt;chr&gt;, ExCoder10Years &lt;chr&gt;,
+## #   ExCoderBelonged &lt;chr&gt;, ExCoderSkills &lt;chr&gt;, ExCoderWillNotCode &lt;chr&gt;,
+## #   ExCoderActive &lt;chr&gt;, PronounceGIF &lt;chr&gt;, ProblemSolving &lt;chr&gt;,
+## #   BuildingThings &lt;chr&gt;, LearningNewTech &lt;chr&gt;, BoringDetails &lt;chr&gt;,
+## #   JobSecurity &lt;chr&gt;, DiversityImportant &lt;chr&gt;, AnnoyingUI &lt;chr&gt;,
+## #   FriendsDevelopers &lt;chr&gt;, RightWrongWay &lt;chr&gt;,
+## #   UnderstandComputers &lt;chr&gt;, SeriousWork &lt;chr&gt;, InvestTimeTools &lt;chr&gt;,
+## #   WorkPayCare &lt;chr&gt;, KinshipDevelopers &lt;chr&gt;, ChallengeMyself &lt;chr&gt;,
+## #   CompetePeers &lt;chr&gt;, ChangeWorld &lt;chr&gt;, JobSeekingStatus &lt;chr&gt;,
+## #   HoursPerWeek &lt;int&gt;, LastNewJob &lt;chr&gt;, AssessJobIndustry &lt;chr&gt;,
+## #   AssessJobRole &lt;chr&gt;, AssessJobExp &lt;chr&gt;, AssessJobDept &lt;chr&gt;,
+## #   AssessJobTech &lt;chr&gt;, AssessJobProjects &lt;chr&gt;,
+## #   AssessJobCompensation &lt;chr&gt;, AssessJobOffice &lt;chr&gt;,
+## #   AssessJobCommute &lt;chr&gt;, AssessJobRemote &lt;chr&gt;, AssessJobLeaders &lt;chr&gt;,
+## #   AssessJobProfDevel &lt;chr&gt;, AssessJobDiversity &lt;chr&gt;,
+## #   AssessJobProduct &lt;chr&gt;, AssessJobFinances &lt;chr&gt;,
+## #   ImportantBenefits &lt;chr&gt;, ClickyKeys &lt;chr&gt;, JobProfile &lt;chr&gt;,
+## #   ResumePrompted &lt;chr&gt;, LearnedHiring &lt;chr&gt;,
+## #   ImportantHiringAlgorithms &lt;chr&gt;, ImportantHiringTechExp &lt;chr&gt;,
+## #   ImportantHiringCommunication &lt;chr&gt;, ImportantHiringOpenSource &lt;chr&gt;,
+## #   ImportantHiringPMExp &lt;chr&gt;, ImportantHiringCompanies &lt;chr&gt;,
+## #   ImportantHiringTitles &lt;chr&gt;, ImportantHiringEducation &lt;chr&gt;,
+## #   ImportantHiringRep &lt;chr&gt;, ImportantHiringGettingThingsDone &lt;chr&gt;,
+## #   Currency &lt;chr&gt;, Overpaid &lt;chr&gt;, TabsSpaces &lt;chr&gt;,
+## #   EducationImportant &lt;chr&gt;, EducationTypes &lt;chr&gt;, SelfTaughtTypes &lt;chr&gt;,
+## #   TimeAfterBootcamp &lt;chr&gt;, CousinEducation &lt;chr&gt;, WorkStart &lt;chr&gt;,
+## #   HaveWorkedLanguage &lt;chr&gt;, WantWorkLanguage &lt;chr&gt;,
+## #   HaveWorkedFramework &lt;chr&gt;, WantWorkFramework &lt;chr&gt;,
+## #   HaveWorkedDatabase &lt;chr&gt;, WantWorkDatabase &lt;chr&gt;,
+## #   HaveWorkedPlatform &lt;chr&gt;, WantWorkPlatform &lt;chr&gt;, IDE &lt;chr&gt;,
+## #   AuditoryEnvironment &lt;chr&gt;, Methodology &lt;chr&gt;, VersionControl &lt;chr&gt;,
+## #   CheckInCode &lt;chr&gt;, ShipIt &lt;chr&gt;, OtherPeoplesCode &lt;chr&gt;,
+## #   ProjectManagement &lt;chr&gt;, EnjoyDebugging &lt;chr&gt;, InTheZone &lt;chr&gt;, ...</code></pre>
+<p>We want to predict the salary of a person based on variables like programming language, age, gender?, Formal Education, years of programming, years in a programming job, job satisfaction, job security or any kind of variable that could have a relation with it.</p>
+<p>We are going to take a look at the distribution of the Salaries, taken all the samples where Salary was reported:</p>
+<p><img src="StackOverflowAnalysis_files/figure-html/Medias-1.png" width="672" /></p>
+<p>Second peak around 50000 dollards looks promising but there is another small peak at very low salaries. Is it like that? Let’s see at the ones answering their salary is bellow 5000 dollards per year that is extremmely low salary. It could be very under-developed countries or people that by mistake was taking it as monthly salary?</p>
+<p><img src="StackOverflowAnalysis_files/figure-html/salaries-1.png" width="672" /></p>
+<p>There is a huge difference between number of people earning less than 5000 dollards/year in India and the rest of countries. We cannot just say there is so big number of mistakes in people answering from India, so we can think salaries in India are miserable….Do not go to India to work in programming unless you like the country and it was for fun.</p>
+<p>We consider we can remove this first peak without affecting the data</p>
+<p><img src="StackOverflowAnalysis_files/figure-html/salaries1-1.png" width="672" /></p>
+<!--Meter max mean salary y minimo -->
+<p>We have seen there could be very different answers on Salary based on Country. Let’s look the mean salary and the number os respondents pero country but looking at the ones with bigger mean salary and number of respondents to see if these are the same:</p>
+<p><img src="StackOverflowAnalysis_files/figure-html/salaries3-1.png" width="672" /><img src="StackOverflowAnalysis_files/figure-html/salaries3-2.png" width="672" /></p>
+<p>Some insights. If you want some decent increase in your salary, do not move to France they are very proud of themselves, speak very strange and you will not get that much. USA seems the place to go if you do not mind to have a kind of carrot as president.</p>
+<p>But all right, we have decided based on this data, use the USA samples to build a model that can predict your salary if you move to USA.</p>
+<p>We have chosen some data that we think it can have an influence on the salary:</p>
+<p>..* FormalEducation ..* MajorUndergrad ..* CompanySize ..* CompanyType ..* YearsProgram ..* YearsCodedJob ..* DeveloperType ..* JobSatisfaction ..* JobSecurity ..* JobSeekingStatus ..* JobProfile&quot; ..* HaveWorkedLanguage ..* HaveWorkedPlatform ..* VersionControl ..* Gender ..* Salary ..* ExpectedSalary</p>
+<div id="there-is-no-correlation-between-jobsatisfaction-and-salary" class="section level2">
+<h2><span class="header-section-number">1.1</span> There is no correlation between JobSatisfaction and Salary</h2>
+<p><img src="StackOverflowAnalysis_files/figure-html/correlation_boxplot-1.png" width="672" /></p>
+<p>It gives the impression that they don’t correlate.</p>
+<p>To complement the analysis, we obtain a correlation.</p>
+<p>First we need to clean the data, eliminating rows with NA</p>
+<pre><code>## [1] 0.09798821</code></pre>
+<p>Which gives value 0.09798821, meaning low correlation.</p>
+<p>As we were trying to validate the null hypothesis, We cannot say there is no relation between salary and satisfaction.</p>
+</div>
+<div id="there-is-no-correlation-between-gender-and-salary" class="section level2">
+<h2><span class="header-section-number">1.2</span> There is no correlation between Gender and Salary</h2>
+<p><img src="StackOverflowAnalysis_files/figure-html/correlation1-1.png" width="672" /></p>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+},
+"search": false
+});
+});
+</script>
+
+</body>
+
+</html>

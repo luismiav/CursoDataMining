@@ -137,19 +137,32 @@ We have chosen some data that we think it can have an influence on the salary:
 
 ## There is no correlation between JobSatisfaction and Salary
 
-```{r correlation, echo=FALSE, warning=FALSE,message=FALSE}
+```{r correlation_boxplot, echo=FALSE, warning=FALSE,message=FALSE}
 
 salary_vs_jobsatidfaction= select(train, "Salary","JobSatisfaction")
 
 
-plot(x=salary_vs_jobsatidfaction$Salary,y=salary_vs_jobsatidfaction$JobSatisfaction)
-
-
+boxplot(salary_vs_jobsatidfaction$Salary ~salary_vs_jobsatidfaction$JobSatisfaction)
 
 ```
 
-We cannot say there is no relation
+It gives the impression that they don't correlate.
 
+To complement the analysis, we obtain a correlation.
+
+First we need to clean the data, eliminating rows with NA
+
+```{r correlation_cor, echo=FALSE, warning=FALSE,message=FALSE}
+
+row.has.na <- apply(salary_vs_jobsatidfaction, 1, function(x){any(is.na(x))})
+salary_vs_jobsatidfaction_withoutNA = salary_vs_jobsatidfaction[!row.has.na,]
+
+cor(salary_vs_jobsatidfaction_withoutNA$Salary, salary_vs_jobsatidfaction_withoutNA$JobSatisfaction)
+
+```
+Which means low correlation.
+
+It seems that this variable could be eliminated from the analysis.
 
 ## There is no correlation between Gender and Salary
 
