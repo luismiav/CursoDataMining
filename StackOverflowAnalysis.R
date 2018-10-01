@@ -42,3 +42,4 @@ mean_salary= survey_results_public %>% group_by(Country) %>% summarise(mean=mean
 
 top_mean_salary = top_n (mean_salary, 10)
 
+cor(surverys_with_salary$Salary, surverys_with_salary$MajorUndergrad)

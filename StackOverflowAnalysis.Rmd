@@ -15,40 +15,153 @@ survey_results_public <- read_csv("survey_results_public.csv")
 head(survey_results_public)
 ```
 
-We want to predict the salary of a person based on variables like programming language, age, Formal Education, years of programming, years in a programming job, job satisfaction, job security or any kind of variable that could have a relation with it.
+We want to predict the salary of a person based on variables like programming language, age, gender?, Formal Education, years of programming, years in a programming job, job satisfaction, job security or any kind of variable that could have a relation with it.
 
-We are going to segment data per country since we see big differences between salaries just at looking to the data.
+We are going to take a look at the distribution of the Salaries, taken all the samples where Salary was reported:
+
+```{r Medias, echo=FALSE,warning=FALSE, message=FALSE}
+
+surverys_with_salary=survey_results_public[!is.na(survey_results_public$Salary),]
+plot (density(surverys_with_salary$Salary))
+
+
+```
+
+Second peak around 50000 dollards looks promising but there is another small peak at very low salaries. Is it like that?
+Let's see at the ones answering their salary is bellow 5000 dollards per year that is extremmely low salary.
+It could be very under-developed countries or people that by mistake was taking it as monthly salary?
+
+```{r Medias, echo=FALSE,warning=FALSE, message=FALSE}
+
+low_salaries_group_by_country =surverys_with_salary%>%filter(Salary<=5000)%>%group_by(Country)
+
+top_low_salaries_group_by_country = top_n(summarise(low_salaries_group_by_country,n=n()),10)
+
+top_low_salaries_group_by_country[8,1]="Rusia"
+
+top_low_salaries_group_by_country =arrange(top_low_salaries_group_by_country, desc(top_low_salaries_group_by_country$n))
+
+top_low_salaries_group_by_country %>%
+  ggplot() +
+  geom_bar(mapping= aes(x=factor(Country, levels = unique(Country)), y=n), stat = "identity", fill="tan1", colour="sienna3")
+
+```
+
+There is a huge difference between number of people earning less than 5000 dollards/year in India and the rest of countries.
+We cannot just say there is so big number of mistakes in people answering from India, so we can think salaries in India are
+miserable....Do not go to India to work in programming unless you like the country and it was for fun.
+
+We consider we can remove this first peak without affecting the data
+
+```{r Medias, echo=FALSE,warning=FALSE, message=FALSE}
+
+train =surverys_with_salary%>%filter(Salary>5000)
+plot(density(train$Salary))
+
+
+
+```
 
 <!--Meter max mean salary y minimo -->
 
-As we want to work on salaries we want to see the mean salary per country.
+We have seen there could be very different answers on Salary based on Country. Let's look the mean salary and the number os respondents
+pero country but looking at the ones with bigger mean salary and number of respondents to see if these are the same:
 
 ```{r ejemplo, echo=FALSE, warning=FALSE, message=FALSE}
+
 library(dplyr)
-mean_salary1=group_by(survey_results_public,Country)
+
+mean_salary1=group_by(train,Country)
 
 mean_salary=summarise(mean_salary1,mean=mean(Salary,na.rm=TRUE),number=n())
 
-
 top_mean_salary = top_n (mean_salary, 10)
+
+top_mean_salary =arrange(top_mean_salary,desc(top_mean_salary$mean))
+
+top_mean_salary[1,1]<-"USA"
+top_mean_salary[5,1]="UK"
+
 
 library(ggplot2)
 
 top_mean_salary %>%
   ggplot() +
-  geom_bar(mapping= aes(x=Country, y=number), stat="identity", fill="tan1", colour="sienna3")+
-  geom_point(mapping = aes(x=Country, y=mean))+
-  geom_line(mapping= aes(x=Country, y =number)) +
-  scale_y_continuous(sec.axis = sec_axis(~./max(top_mean_salary$number)))
+  geom_bar(mapping= aes(x=factor(Country, levels = unique(Country)), y=mean), stat = "identity", fill="tan1", colour="sienna3")
+
+top_mean_salary =arrange(top_mean_salary,desc(top_mean_salary$number))
+
+top_mean_salary %>%
+  ggplot() +
+  geom_bar(mapping= aes(x=factor(Country, levels= unique(Country)), y=number), stat="identity", fill="tan1", colour="sienna3")
+  
+
 
 ```
 
-## Including Plots
+Some insights. If you want some decent increase in your salary, do not move to France they are very proud of themselves, speak very strange and you will not get that much. USA seems the place to go if you do not mind to have a kind of carrot as president.
 
-You can also embed plots, for example:
+But all right, we have decided based on this data, use the USA samples to build a model that can predict your salary if you move to USA.
+
+```{r ejemplo, echo=FALSE, warning=FALSE, message=FALSE}
+
+train= train%>%filter(Country=="United States")
+
+train=select(train, "FormalEducation","MajorUndergrad","CompanySize", "CompanyType", "YearsProgram", "YearsCodedJob", "DeveloperType", "JobSatisfaction", "JobSecurity", "JobSeekingStatus", "JobProfile", "HaveWorkedLanguage", "HaveWorkedPlatform", "VersionControl", "Gender","Salary","ExpectedSalary")
+
+```
+
+We have chosen some data that we think it can have an influence on the salary:
+
+..* FormalEducation
+..* MajorUndergrad
+..* CompanySize
+..* CompanyType
+..* YearsProgram
+..* YearsCodedJob
+..* DeveloperType
+..* JobSatisfaction
+..* JobSecurity
+..* JobSeekingStatus
+..* JobProfile"
+..* HaveWorkedLanguage
+..* HaveWorkedPlatform
+..* VersionControl
+..* Gender
+..* Salary
+..* ExpectedSalary
 
 
-```{r pressure, echo=FALSE}
-library(ggplot2)
-ggplot(cars,aes(x=speed,y=dist)) + geom_point()
+## There is no correlation between JobSatisfaction and Salary
+
+```{r ejemplo, echo=FALSE, warning=FALSE}
+
+salary_vs_jobsatidfaction= select(train, "Salary","JobSatisfaction")
+chi2 = chisq.test(table(salary_vs_jobsatidfaction), p=rep(1/12,12))
+View(chi2)
+
+plot(x=salary_vs_jobsatidfaction$Salary,y=salary_vs_jobsatidfaction$JobSatisfaction)
+
+
+
+```
+
+We cannot say there is no relation
+
+
+## There is no correlation between Gender and Salary
+
+```{r pressure, echo=FALSE, warning= FALSE, message= FALSE}
+
+train1= train
+train1$female= ifelse(train1$Gender=="Female",1,0)
+train1$male= ifelse(train1$Gender=="Male",1,0)
+train1=select(train1, "Salary", "male", "female")
+males=train1%>%group_by(male)%>%summarise(mean=mean(Salary, na.rm = TRUE, number=n()))
+
+males %>%
+  ggplot() +
+  geom_bar(mapping= aes(x=factor(male, levels= unique(male)), y=mean), stat="identity", fill="tan1", colour="sienna3")
+
+
 ```
