@@ -31,7 +31,10 @@ Second peak around 50000 dollards looks promising but there is another small pea
 Let's see at the ones answering their salary is bellow 5000 dollards per year that is extremmely low salary.
 It could be very under-developed countries or people that by mistake was taking it as monthly salary?
 
-```{r Medias, echo=FALSE,warning=FALSE, message=FALSE}
+```{r salaries, echo=FALSE,warning=FALSE, message=FALSE}
+
+library(dplyr)
+library(ggplot2)
 
 low_salaries_group_by_country =surverys_with_salary%>%filter(Salary<=5000)%>%group_by(Country)
 
@@ -53,7 +56,7 @@ miserable....Do not go to India to work in programming unless you like the count
 
 We consider we can remove this first peak without affecting the data
 
-```{r Medias, echo=FALSE,warning=FALSE, message=FALSE}
+```{r salaries1, echo=FALSE,warning=FALSE, message=FALSE}
 
 train =surverys_with_salary%>%filter(Salary>5000)
 plot(density(train$Salary))
@@ -67,7 +70,7 @@ plot(density(train$Salary))
 We have seen there could be very different answers on Salary based on Country. Let's look the mean salary and the number os respondents
 pero country but looking at the ones with bigger mean salary and number of respondents to see if these are the same:
 
-```{r ejemplo, echo=FALSE, warning=FALSE, message=FALSE}
+```{r salaries3, echo=FALSE, warning=FALSE, message=FALSE}
 
 library(dplyr)
 
@@ -103,7 +106,7 @@ Some insights. If you want some decent increase in your salary, do not move to F
 
 But all right, we have decided based on this data, use the USA samples to build a model that can predict your salary if you move to USA.
 
-```{r ejemplo, echo=FALSE, warning=FALSE, message=FALSE}
+```{r filering, echo=FALSE, warning=FALSE, message=FALSE}
 
 train= train%>%filter(Country=="United States")
 
@@ -134,11 +137,10 @@ We have chosen some data that we think it can have an influence on the salary:
 
 ## There is no correlation between JobSatisfaction and Salary
 
-```{r ejemplo, echo=FALSE, warning=FALSE}
+```{r correlation, echo=FALSE, warning=FALSE,message=FALSE}
 
 salary_vs_jobsatidfaction= select(train, "Salary","JobSatisfaction")
-chi2 = chisq.test(table(salary_vs_jobsatidfaction), p=rep(1/12,12))
-View(chi2)
+
 
 plot(x=salary_vs_jobsatidfaction$Salary,y=salary_vs_jobsatidfaction$JobSatisfaction)
 
@@ -151,7 +153,7 @@ We cannot say there is no relation
 
 ## There is no correlation between Gender and Salary
 
-```{r pressure, echo=FALSE, warning= FALSE, message= FALSE}
+```{r correlation1, echo=FALSE, warning= FALSE, message= FALSE}
 
 train1= train
 train1$female= ifelse(train1$Gender=="Female",1,0)
