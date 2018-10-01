@@ -184,3 +184,16 @@ train1_withoutNA = train1[!row.has.na,]
 cor(train1_withoutNA$Salary,train1_withoutNA$male)
 
 ```
+
+```{r correlation_NumYears, echo=FALSE, warning= FALSE, message= FALSE}
+
+train2=salary_vs_yearscodedjob
+train2$NumYears = salary_vs_yearscodedjob$YearsCodedJob
+row.has.na <- apply(train2, 1, function(x){any(is.na(x))})
+train2_withoutNA = train2[!row.has.na,]
+train2_withoutNA$NumYears = as.numeric(sapply(strsplit(train2_withoutNA$NumYears, " "), "[[", 1))
+train2_withoutNA$NumYears[is.na(train2_withoutNA$NumYears)] <- 0
+
+cor(train2_withoutNA$Salary,train2_withoutNA$NumYears)
+
+```

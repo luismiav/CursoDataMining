@@ -91,12 +91,12 @@
 <pre><code>## # A tibble: 6 x 154
 ##   Respondent Professional ProgramHobby Country University EmploymentStatus
 ##        &lt;int&gt; &lt;chr&gt;        &lt;chr&gt;        &lt;chr&gt;   &lt;chr&gt;      &lt;chr&gt;           
-## 1          1 Student      Yes, both    United~ No         Not employed, a~
-## 2          2 Student      Yes, both    United~ Yes, full~ Employed part-t~
-## 3          3 Professiona~ Yes, both    United~ No         Employed full-t~
-## 4          4 Professiona~ Yes, both    United~ No         Employed full-t~
-## 5          5 Professiona~ Yes, I prog~ Switze~ No         Employed full-t~
-## 6          6 Student      Yes, both    New Ze~ Yes, full~ Not employed, a~
+## 1          1 Student      Yes, both    United… No         Not employed, a…
+## 2          2 Student      Yes, both    United… Yes, full… Employed part-t…
+## 3          3 Professiona… Yes, both    United… No         Employed full-t…
+## 4          4 Professiona… Yes, both    United… No         Employed full-t…
+## 5          5 Professiona… Yes, I prog… Switze… No         Employed full-t…
+## 6          6 Student      Yes, both    New Ze… Yes, full… Not employed, a…
 ## # ... with 148 more variables: FormalEducation &lt;chr&gt;,
 ## #   MajorUndergrad &lt;chr&gt;, HomeRemote &lt;chr&gt;, CompanySize &lt;chr&gt;,
 ## #   CompanyType &lt;chr&gt;, YearsProgram &lt;chr&gt;, YearsCodedJob &lt;chr&gt;,
@@ -135,7 +135,7 @@
 ## #   HaveWorkedPlatform &lt;chr&gt;, WantWorkPlatform &lt;chr&gt;, IDE &lt;chr&gt;,
 ## #   AuditoryEnvironment &lt;chr&gt;, Methodology &lt;chr&gt;, VersionControl &lt;chr&gt;,
 ## #   CheckInCode &lt;chr&gt;, ShipIt &lt;chr&gt;, OtherPeoplesCode &lt;chr&gt;,
-## #   ProjectManagement &lt;chr&gt;, EnjoyDebugging &lt;chr&gt;, InTheZone &lt;chr&gt;, ...</code></pre>
+## #   ProjectManagement &lt;chr&gt;, EnjoyDebugging &lt;chr&gt;, InTheZone &lt;chr&gt;, …</code></pre>
 <p>We want to predict the salary of a person based on variables like programming language, age, gender?, Formal Education, years of programming, years in a programming job, job satisfaction, job security or any kind of variable that could have a relation with it.</p>
 <p>We are going to take a look at the distribution of the Salaries, taken all the samples where Salary was reported:</p>
 <p><img src="StackOverflowAnalysis_files/figure-html/Medias-1.png" width="672" /></p>
@@ -158,12 +158,13 @@
 <p>To complement the analysis, we obtain a correlation.</p>
 <p>First we need to clean the data, eliminating rows with NA</p>
 <pre><code>## [1] 0.09798821</code></pre>
-<p>Which gives value 0.09798821, meaning low correlation.</p>
-<p>As we were trying to validate the null hypothesis, We cannot say there is no relation between salary and satisfaction.</p>
+<p>Which means low correlation.</p>
+<p>It seems that this variable could be eliminated from the analysis.</p>
 </div>
 <div id="there-is-no-correlation-between-gender-and-salary" class="section level2">
 <h2><span class="header-section-number">1.2</span> There is no correlation between Gender and Salary</h2>
 <p><img src="StackOverflowAnalysis_files/figure-html/correlation1-1.png" width="672" /></p>
+<pre><code>## [1] 0.05425633</code></pre>
 </div>
 </div>
             </section>
