@@ -6,7 +6,7 @@ date: "25-09-2018"
 
 # Introduction
 
-We are anlalyzing StackOverflow data. This is a data frame with 51392 observations and 154 variables
+We are analyzing StackOverflow data. This is a data frame with 51392 observations and 154 variables coming from surveys from Stackoverflow users.
 
 
 ```{r Data, echo=FALSE, warning=FALSE, message=FALSE}
@@ -15,7 +15,7 @@ survey_results_public <- read_csv("survey_results_public.csv")
 head(survey_results_public)
 ```
 
-We want to predict the salary of a person based on variables like programming language, age, gender?, Formal Education, years of programming, years in a programming job, job satisfaction, job security or any kind of variable that could have a relation with it.
+Would it be possible to predict a programmer's salary based on the answers to some questions of this survey?. 
 
 We are going to take a look at the distribution of the Salaries, taken all the samples where Salary was reported:
 
@@ -68,7 +68,7 @@ plot(density(train$Salary))
 <!--Meter max mean salary y minimo -->
 
 We have seen there could be very different answers on Salary based on Country. Let's look the mean salary and the number os respondents
-pero country but looking at the ones with bigger mean salary and number of respondents to see if these are the same:
+per country but looking at the ones with bigger mean salary and number of respondents to see if these are the same:
 
 ```{r salaries3, echo=FALSE, warning=FALSE, message=FALSE}
 
@@ -116,24 +116,26 @@ train=select(train, "FormalEducation","MajorUndergrad","CompanySize", "CompanyTy
 
 We have chosen some data that we think it can have an influence on the salary:
 
-..* FormalEducation
-..* MajorUndergrad
-..* CompanySize
-..* CompanyType
-..* YearsProgram
-..* YearsCodedJob
-..* DeveloperType
-..* JobSatisfaction
-..* JobSecurity
-..* JobSeekingStatus
-..* JobProfile"
-..* HaveWorkedLanguage
-..* HaveWorkedPlatform
-..* VersionControl
-..* Gender
-..* Salary
-..* ExpectedSalary
+* FormalEducation
+* MajorUndergrad
+* CompanySize
+* CompanyType
+* YearsProgram
+* YearsCodedJob
+* DeveloperType
+* JobSatisfaction
+* JobSecurity
+* JobSeekingStatus
+* JobProfile"
+* HaveWorkedLanguage
+* HaveWorkedPlatform
+* VersionControl
+* Gender
+* ExpectedSalary
 
+and of course
+
+* Salary
 
 ## There is no correlation between JobSatisfaction and Salary
 
@@ -174,9 +176,8 @@ train1$male= ifelse(train1$Gender=="Male",1,0)
 train1=select(train1, "Salary", "male", "female")
 males=train1%>%group_by(male)%>%summarise(mean=mean(Salary, na.rm = TRUE, number=n()))
 
-males %>%
-  ggplot() +
-  geom_bar(mapping= aes(x=factor(male, levels= unique(male)), y=mean), stat="identity", fill="tan1", colour="sienna3")
+
+boxplot(train1$Salary~train1$male)
 
 row.has.na <- apply(train1, 1, function(x){any(is.na(x))})
 train1_withoutNA = train1[!row.has.na,]
@@ -206,3 +207,13 @@ ggplot(aes(x=train2_withoutNA$NumYears, y=train2_withoutNA$Salary), data = train
 confint(m1)
 
 ```
+
+This variable has a clear influence in the Salary so it should be kepct in the model.
+
+Next steps would be to continue looking more variables that can be part of the model.
+Then split the 4000 observations from USA with Salary into two data frames.
+
+Train-> To build the model
+Test -> For testing the model and see if the model works
+
+Then use your own data to see your salary on USA.
