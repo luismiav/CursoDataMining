@@ -63,6 +63,7 @@
 <li class="chapter" data-level="1" data-path=""><a href="#introduction"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
 <li class="chapter" data-level="1.1" data-path=""><a href="#there-is-no-correlation-between-jobsatisfaction-and-salary"><i class="fa fa-check"></i><b>1.1</b> There is no correlation between JobSatisfaction and Salary</a></li>
 <li class="chapter" data-level="1.2" data-path=""><a href="#there-is-no-correlation-between-gender-and-salary"><i class="fa fa-check"></i><b>1.2</b> There is no correlation between Gender and Salary</a></li>
+<li class="chapter" data-level="1.3" data-path=""><a href="#there-is-correlation-between-salary-and-yearscodedjob"><i class="fa fa-check"></i><b>1.3</b> There is correlation between Salary and YearsCodedJob</a></li>
 </ul></li>
 </ul>
 
@@ -91,12 +92,12 @@
 <pre><code>## # A tibble: 6 x 154
 ##   Respondent Professional ProgramHobby Country University EmploymentStatus
 ##        &lt;int&gt; &lt;chr&gt;        &lt;chr&gt;        &lt;chr&gt;   &lt;chr&gt;      &lt;chr&gt;           
-## 1          1 Student      Yes, both    United… No         Not employed, a…
-## 2          2 Student      Yes, both    United… Yes, full… Employed part-t…
-## 3          3 Professiona… Yes, both    United… No         Employed full-t…
-## 4          4 Professiona… Yes, both    United… No         Employed full-t…
-## 5          5 Professiona… Yes, I prog… Switze… No         Employed full-t…
-## 6          6 Student      Yes, both    New Ze… Yes, full… Not employed, a…
+## 1          1 Student      Yes, both    United~ No         Not employed, a~
+## 2          2 Student      Yes, both    United~ Yes, full~ Employed part-t~
+## 3          3 Professiona~ Yes, both    United~ No         Employed full-t~
+## 4          4 Professiona~ Yes, both    United~ No         Employed full-t~
+## 5          5 Professiona~ Yes, I prog~ Switze~ No         Employed full-t~
+## 6          6 Student      Yes, both    New Ze~ Yes, full~ Not employed, a~
 ## # ... with 148 more variables: FormalEducation &lt;chr&gt;,
 ## #   MajorUndergrad &lt;chr&gt;, HomeRemote &lt;chr&gt;, CompanySize &lt;chr&gt;,
 ## #   CompanyType &lt;chr&gt;, YearsProgram &lt;chr&gt;, YearsCodedJob &lt;chr&gt;,
@@ -135,7 +136,7 @@
 ## #   HaveWorkedPlatform &lt;chr&gt;, WantWorkPlatform &lt;chr&gt;, IDE &lt;chr&gt;,
 ## #   AuditoryEnvironment &lt;chr&gt;, Methodology &lt;chr&gt;, VersionControl &lt;chr&gt;,
 ## #   CheckInCode &lt;chr&gt;, ShipIt &lt;chr&gt;, OtherPeoplesCode &lt;chr&gt;,
-## #   ProjectManagement &lt;chr&gt;, EnjoyDebugging &lt;chr&gt;, InTheZone &lt;chr&gt;, …</code></pre>
+## #   ProjectManagement &lt;chr&gt;, EnjoyDebugging &lt;chr&gt;, InTheZone &lt;chr&gt;, ...</code></pre>
 <p>We want to predict the salary of a person based on variables like programming language, age, gender?, Formal Education, years of programming, years in a programming job, job satisfaction, job security or any kind of variable that could have a relation with it.</p>
 <p>We are going to take a look at the distribution of the Salaries, taken all the samples where Salary was reported:</p>
 <p><img src="StackOverflowAnalysis_files/figure-html/Medias-1.png" width="672" /></p>
@@ -165,8 +166,14 @@
 <h2><span class="header-section-number">1.2</span> There is no correlation between Gender and Salary</h2>
 <p><img src="StackOverflowAnalysis_files/figure-html/correlation1-1.png" width="672" /></p>
 <pre><code>## [1] 0.05425633</code></pre>
+</div>
+<div id="there-is-correlation-between-salary-and-yearscodedjob" class="section level2">
+<h2><span class="header-section-number">1.3</span> There is correlation between Salary and YearsCodedJob</h2>
 <pre><code>## [1] 0.5381711</code></pre>
 <p><img src="StackOverflowAnalysis_files/figure-html/correlation_NumYears-1.png" width="672" /></p>
+<pre><code>##                                 2.5 %        97.5 %
+## (Intercept)             -2.370266e+00 -1.3209414261
+## train2_withoutNA$Salary  9.683248e-05  0.0001070672</code></pre>
 </div>
 </div>
             </section>
