@@ -88,16 +88,16 @@
 </div>
 <div id="introduction" class="section level1">
 <h1><span class="header-section-number">1</span> Introduction</h1>
-<p>We are anlalyzing StackOverflow data. This is a data frame with 51392 observations and 154 variables</p>
+<p>We are analyzing StackOverflow data. This is a data frame with 51392 observations and 154 variables coming from surveys from Stackoverflow users.</p>
 <pre><code>## # A tibble: 6 x 154
 ##   Respondent Professional ProgramHobby Country University EmploymentStatus
 ##        &lt;int&gt; &lt;chr&gt;        &lt;chr&gt;        &lt;chr&gt;   &lt;chr&gt;      &lt;chr&gt;           
-## 1          1 Student      Yes, both    United~ No         Not employed, a~
-## 2          2 Student      Yes, both    United~ Yes, full~ Employed part-t~
-## 3          3 Professiona~ Yes, both    United~ No         Employed full-t~
-## 4          4 Professiona~ Yes, both    United~ No         Employed full-t~
-## 5          5 Professiona~ Yes, I prog~ Switze~ No         Employed full-t~
-## 6          6 Student      Yes, both    New Ze~ Yes, full~ Not employed, a~
+## 1          1 Student      Yes, both    United… No         Not employed, a…
+## 2          2 Student      Yes, both    United… Yes, full… Employed part-t…
+## 3          3 Professiona… Yes, both    United… No         Employed full-t…
+## 4          4 Professiona… Yes, both    United… No         Employed full-t…
+## 5          5 Professiona… Yes, I prog… Switze… No         Employed full-t…
+## 6          6 Student      Yes, both    New Ze… Yes, full… Not employed, a…
 ## # ... with 148 more variables: FormalEducation &lt;chr&gt;,
 ## #   MajorUndergrad &lt;chr&gt;, HomeRemote &lt;chr&gt;, CompanySize &lt;chr&gt;,
 ## #   CompanyType &lt;chr&gt;, YearsProgram &lt;chr&gt;, YearsCodedJob &lt;chr&gt;,
@@ -136,8 +136,8 @@
 ## #   HaveWorkedPlatform &lt;chr&gt;, WantWorkPlatform &lt;chr&gt;, IDE &lt;chr&gt;,
 ## #   AuditoryEnvironment &lt;chr&gt;, Methodology &lt;chr&gt;, VersionControl &lt;chr&gt;,
 ## #   CheckInCode &lt;chr&gt;, ShipIt &lt;chr&gt;, OtherPeoplesCode &lt;chr&gt;,
-## #   ProjectManagement &lt;chr&gt;, EnjoyDebugging &lt;chr&gt;, InTheZone &lt;chr&gt;, ...</code></pre>
-<p>We want to predict the salary of a person based on variables like programming language, age, gender?, Formal Education, years of programming, years in a programming job, job satisfaction, job security or any kind of variable that could have a relation with it.</p>
+## #   ProjectManagement &lt;chr&gt;, EnjoyDebugging &lt;chr&gt;, InTheZone &lt;chr&gt;, …</code></pre>
+<p>Would it be possible to predict a programmer’s salary based on the answers to some questions of this survey?.</p>
 <p>We are going to take a look at the distribution of the Salaries, taken all the samples where Salary was reported:</p>
 <p><img src="StackOverflowAnalysis_files/figure-html/Medias-1.png" width="672" /></p>
 <p>Second peak around 50000 dollards looks promising but there is another small peak at very low salaries. Is it like that? Let’s see at the ones answering their salary is bellow 5000 dollards per year that is extremmely low salary. It could be very under-developed countries or people that by mistake was taking it as monthly salary?</p>
@@ -146,12 +146,33 @@
 <p>We consider we can remove this first peak without affecting the data</p>
 <p><img src="StackOverflowAnalysis_files/figure-html/salaries1-1.png" width="672" /></p>
 <!--Meter max mean salary y minimo -->
-<p>We have seen there could be very different answers on Salary based on Country. Let’s look the mean salary and the number os respondents pero country but looking at the ones with bigger mean salary and number of respondents to see if these are the same:</p>
+<p>We have seen there could be very different answers on Salary based on Country. Let’s look the mean salary and the number os respondents per country but looking at the ones with bigger mean salary and number of respondents to see if these are the same:</p>
 <p><img src="StackOverflowAnalysis_files/figure-html/salaries3-1.png" width="672" /><img src="StackOverflowAnalysis_files/figure-html/salaries3-2.png" width="672" /></p>
 <p>Some insights. If you want some decent increase in your salary, do not move to France they are very proud of themselves, speak very strange and you will not get that much. USA seems the place to go if you do not mind to have a kind of carrot as president.</p>
 <p>But all right, we have decided based on this data, use the USA samples to build a model that can predict your salary if you move to USA.</p>
 <p>We have chosen some data that we think it can have an influence on the salary:</p>
-<p>..* FormalEducation ..* MajorUndergrad ..* CompanySize ..* CompanyType ..* YearsProgram ..* YearsCodedJob ..* DeveloperType ..* JobSatisfaction ..* JobSecurity ..* JobSeekingStatus ..* JobProfile&quot; ..* HaveWorkedLanguage ..* HaveWorkedPlatform ..* VersionControl ..* Gender ..* Salary ..* ExpectedSalary</p>
+<ul>
+<li>FormalEducation</li>
+<li>MajorUndergrad</li>
+<li>CompanySize</li>
+<li>CompanyType</li>
+<li>YearsProgram</li>
+<li>YearsCodedJob</li>
+<li>DeveloperType</li>
+<li>JobSatisfaction</li>
+<li>JobSecurity</li>
+<li>JobSeekingStatus</li>
+<li>JobProfile&quot;</li>
+<li>HaveWorkedLanguage</li>
+<li>HaveWorkedPlatform</li>
+<li>VersionControl</li>
+<li>Gender</li>
+<li>ExpectedSalary</li>
+</ul>
+<p>and of course</p>
+<ul>
+<li>Salary</li>
+</ul>
 <div id="there-is-no-correlation-between-jobsatisfaction-and-salary" class="section level2">
 <h2><span class="header-section-number">1.1</span> There is no correlation between JobSatisfaction and Salary</h2>
 <p><img src="StackOverflowAnalysis_files/figure-html/correlation_boxplot-1.png" width="672" /></p>
@@ -174,6 +195,10 @@
 <pre><code>##                                 2.5 %        97.5 %
 ## (Intercept)             -2.370266e+00 -1.3209414261
 ## train2_withoutNA$Salary  9.683248e-05  0.0001070672</code></pre>
+<p>This variable has a clear influence in the Salary so it should be kepct in the model.</p>
+<p>Next steps would be to continue looking more variables that can be part of the model. Then split the 4000 observations from USA with Salary into two data frames.</p>
+<p>Train-&gt; To build the model Test -&gt; For testing the model and see if the model works</p>
+<p>Then use your own data to see your salary on USA.</p>
 </div>
 </div>
             </section>
