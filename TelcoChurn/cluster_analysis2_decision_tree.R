@@ -55,9 +55,18 @@ for (i in 1:num_clusters){
 ################################################
 
 library(rpart)
-dt1 = rpart(telco_train$Churn~telco_train$PaperlessBilling+telco_train$Contract+telco_train$tenure+
-              telco_train$TotalCharges+telco_train$Dependents,data=telco_train2[km1$cluster==3,])
+dt1 = rpart(Churn~PaperlessBilling+Contract+tenure+
+              TotalCharges+Dependents,data=telco_train2[km1$cluster==3,])
 library(rpart.plot)
 library(rattle)
 fancyRpartPlot(dt1)
+predict.dt1 = predict(dt1, telco)
+#intento crear una tabla para comparar pero no me da tiempo ...
 
+#################
+library(rpart)
+dt2= rpart(Churn~MonthlyCharges+TotalCharges+tenure+PaymentMethod,data=telco_train[km1$cluster==3,])
+library(rpart.plot)
+library(rattle)
+fancyRpartPlot(dt2)
+predict.dt2= predict(dt2 telco)
